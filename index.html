@@ -27,7 +27,13 @@
 
         /* --- Header & Hero --- */
         header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            /* ATUALIZADO: Imagem de fundo com transparência ajustada */
+            /* O valor 0.75 deixa o roxo mais suave para a foto aparecer mais */
+            background: linear-gradient(135deg, rgba(74, 20, 140, 0.75), rgba(106, 27, 154, 0.75)), url('fotos/fundo-header.jpg');
+            background-size: cover;      /* Garante que a imagem cubra tudo */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat;
+            
             color: var(--white);
             padding: 6rem 2rem 4rem;
             text-align: center;
@@ -37,7 +43,7 @@
         header h1 {
             margin: 0;
             font-size: 2.8rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6); /* Sombra mais forte para leitura sobre foto */
         }
 
         header p {
@@ -45,6 +51,7 @@
             margin-top: 10px;
             opacity: 0.95;
             font-weight: 300;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         }
 
         .date-badge {
@@ -55,7 +62,7 @@
             font-weight: bold;
             display: inline-block;
             margin-top: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
         /* --- Layout --- */
@@ -200,48 +207,6 @@
             color: #777;
         }
 
-        /* --- Galeria --- */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery-item {
-            background-color: #e0e0e0;
-            height: 200px;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-            display: block;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Mensagem de erro amigável se a foto não existir */
-        .gallery-item img.error {
-            display: none;
-        }
-        .gallery-item.has-error::after {
-            content: 'Adicione foto1.jpg na pasta fotos';
-            text-align: center;
-            padding: 10px;
-            font-size: 0.8rem;
-        }
-
         /* --- Footer --- */
         footer {
             background: #222;
@@ -270,12 +235,11 @@
     <div class="date-badge"><i class="far fa-calendar-alt"></i> 28 de Janeiro de 2026 • 09:00 às 18:00</div>
     <br><br>
     
-    <!-- Botões do Header Atualizados -->
+    <!-- Botões do Header -->
     <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
         <a href="#perguntas" class="btn" style="background:var(--white); color:var(--primary)">
             <i class="fas fa-comment-dots"></i> Enviar Pergunta
         </a>
-        <!-- Link do Teams atualizado -->
         <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Yzc3NGRkMTMtZGJhNy00MmFiLWFmMDgtMTVhNTRhZjMwZmEx%40thread.v2/0?context=%7b%22Tid%22%3a%22d233d58a-9973-43a7-af69-6763630548a0%22%2c%22Oid%22%3a%225d77ae6a-7075-4204-b953-983a09372818%22%7d" target="_blank" class="btn" style="background:var(--accent); color:var(--text)">
             <i class="fas fa-video"></i> Assistir Online (Teams)
         </a>
@@ -290,7 +254,7 @@
         <p>A <strong>Motiva</strong> tem orgulho em iniciar um movimento para fortalecer a cultura técnica e a colaboração no setor de infraestrutura. Este encontro reúne especialistas renomados para discutir as melhores práticas em Obras de Arte Especiais e durabilidade, com foco especial em reações expansivas.</p>
     </section>
 
-    <!-- Transmissão Online (NOVO BLOCO) -->
+    <!-- Transmissão Online -->
     <section>
         <h2><i class="fas fa-broadcast-tower"></i> Transmissão Online</h2>
         <div style="background-color: #eef2ff; padding: 25px; border-radius: 12px; border-left: 6px solid #5b5fc7; display: flex; flex-direction: column; gap: 15px;">
@@ -304,7 +268,6 @@
             
             <p style="margin: 0;">Para quem não puder comparecer presencialmente, disponibilizamos a transmissão ao vivo de todas as palestras.</p>
             
-            <!-- Botão do Teams atualizado -->
             <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Yzc3NGRkMTMtZGJhNy00MmFiLWFmMDgtMTVhNTRhZjMwZmEx%40thread.v2/0?context=%7b%22Tid%22%3a%22d233d58a-9973-43a7-af69-6763630548a0%22%2c%22Oid%22%3a%225d77ae6a-7075-4204-b953-983a09372818%22%7d" target="_blank" class="btn" style="background-color: #5b5fc7; color: white; align-self: flex-start; text-align: center;">
                 <i class="fas fa-video"></i> ENCONTRO TÉCNICO RAA | Ingresso na Reunião | Microsoft Teams
             </a>
@@ -313,7 +276,7 @@
                 *Recomendamos acessar com 10 minutos de antecedência para verificar sua conexão.
             </p>
 
-            <!-- Bloco de Regras e Cuidados (NOVO) -->
+            <!-- Bloco de Regras e Cuidados -->
             <div style="background-color: #fff3e0; border: 1px solid #ffe0b2; border-radius: 8px; padding: 20px; margin-top: 15px;">
                 <h4 style="margin: 0 0 10px 0; color: #e65100; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
                     <i class="fas fa-exclamation-triangle"></i> Avisos Importantes e Regras de Conduta
@@ -390,15 +353,26 @@
         </div>
     </section>
 
-    <!-- Perguntas Online -->
+    <!-- Perguntas Online (ATUALIZADO) -->
     <section id="perguntas" class="interactive-section">
         <h2><i class="fas fa-question-circle"></i> Perguntas ao Vivo</h2>
-        <p>Está acompanhando o simpósio? Envie sua dúvida para a mesa redonda agora mesmo pelo Slido.</p>
+        
+        <!-- Texto Explicativo Novo -->
+        <div style="max-width: 800px; margin: 0 auto 20px auto; color: #555;">
+            <p style="font-size: 1.1rem; margin-bottom: 10px;">
+                As perguntas que forem surgindo serão computadas no Slido e, durante o evento, 
+                os participantes poderão <strong>votar nas questões mais relevantes</strong>.
+            </p>
+            <p style="font-size: 1rem;">
+                As dúvidas mais votadas serão priorizadas e abordadas pelos especialistas durante a mesa redonda final. 
+                Participe enviando ou votando!
+            </p>
+        </div>
         
         <!-- Integração Slido -->
         <div style="background: white; padding: 10px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden;">
             <iframe 
-                src="https://app.sli.do/event/87Wd8fH3VxXLrfGr7XUWF2" 
+                src="https://app.sli.do/event/aDakNJGDf8Evrs5gJawNdU" 
                 height="500" 
                 width="100%" 
                 frameBorder="0" 
@@ -409,17 +383,17 @@
         
         <div style="margin-top: 20px;">
             <p style="font-size: 0.9rem; margin-bottom: 10px;">Não conseguiu visualizar acima?</p>
-            <a href="https://app.sli.do/event/87Wd8fH3VxXLrfGr7XUWF2" target="_blank" class="btn" style="background-color: #28a745; color: white;">
+            <a href="https://app.sli.do/event/aDakNJGDf8Evrs5gJawNdU" target="_blank" class="btn" style="background-color: #28a745; color: white;">
                 <i class="fas fa-external-link-alt"></i> Abrir Slido em Nova Aba
             </a>
         </div>
     </section>
 
-    <!-- Localização (ATUALIZADO) -->
+    <!-- Localização -->
     <section>
         <h2><i class="fas fa-map-marker-alt"></i> Localização</h2>
         
-        <!-- Bloco do Local Oficial (NOVO - VERDE) -->
+        <!-- Bloco do Local Oficial -->
         <div style="background-color: #e8f5e9; padding: 25px; border-radius: 12px; border-left: 6px solid #2e7d32; display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
             <h3 style="margin: 0; color: #2e7d32; display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-map-marker-alt" style="font-size: 1.5rem;"></i> Local Oficial do Evento
@@ -429,7 +403,6 @@
                 Av. Prof.ª Maria do Carmo Guimarães Pellegrini, 200 - Jundiaí, SP
             </p>
             
-            <!-- Detalhes de Acesso Atualizados -->
             <div style="margin: 0; font-size: 0.95rem; color: #555; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 6px;">
                 <p style="margin-top: 0; margin-bottom: 10px;">
                     <i class="fas fa-info-circle"></i> <strong>Orientações de Chegada:</strong>
@@ -450,7 +423,7 @@
             </a>
         </div>
 
-        <!-- Mapa Real do Google Maps Embed -->
+        <!-- Mapa Real do Google Maps -->
         <div style="width: 100%; height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
             <iframe 
                 width="100%" 
@@ -463,7 +436,7 @@
             </iframe>
         </div>
 
-        <!-- Bloco de Estacionamento Adicionado -->
+        <!-- Bloco de Estacionamento -->
         <div style="background-color: #f3e5f5; padding: 25px; border-radius: 12px; border-left: 6px solid var(--secondary); display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
             <h3 style="margin: 0; color: var(--secondary); display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-parking" style="font-size: 1.5rem;"></i> Estacionamento Sugerido
@@ -488,7 +461,7 @@
             </a>
         </div>
 
-        <!-- Bloco de Almoço (NOVO) -->
+        <!-- Bloco de Almoço -->
         <div style="background-color: #fff8e1; padding: 25px; border-radius: 12px; border-left: 6px solid var(--accent); display: flex; flex-direction: column; gap: 10px;">
             <h3 style="margin: 0; color: #f57c00; display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-utensils" style="font-size: 1.5rem;"></i> Sugestão para Almoço
@@ -508,7 +481,7 @@
         </div>
     </section>
 
-    <!-- Orientações Gerais (NOVA SEÇÃO) -->
+    <!-- Orientações Gerais -->
     <section>
         <h2><i class="fas fa-clipboard-list"></i> Orientações para o Dia</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
@@ -531,8 +504,6 @@
                 </p>
             </div>
 
-            <!-- Item 3 removido (Wi-Fi) -->
-
             <!-- Item 4: Acessibilidade -->
             <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                 <i class="fas fa-wheelchair" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
@@ -545,7 +516,7 @@
         </div>
     </section>
 
-    <!-- Galeria (ATUALIZADO - Link Externo) -->
+    <!-- Galeria (Link Externo) -->
     <section>
         <h2><i class="fas fa-images"></i> Galeria de Fotos</h2>
         
@@ -560,7 +531,7 @@
             
             <p style="margin: 0;">Você poderá acessar, baixar e compartilhar as fotos em alta resolução através do nosso álbum digital compartilhado.</p>
             
-            <!-- Link para o álbum (Coloque o link do Google Photos/Drive aqui no href) -->
+            <!-- Link para o álbum (Substitua o # pelo link real quando tiver) -->
             <a href="#" target="_blank" class="btn" style="background-color: #1976d2; color: white; align-self: flex-start; text-align: center;">
                 <i class="fas fa-external-link-alt"></i> Acessar Álbum de Fotos
             </a>
@@ -581,5 +552,4 @@
 </footer>
 
 </body>
-
 </html>
