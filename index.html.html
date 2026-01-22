@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Encontro Técnico de Infraestrutura - Motiva</title>
+    <!-- Ícones para visual mais profissional -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #4a148c;
+            --accent: #ffb74d; 
+            --light: #f8f9fa;
+            --text: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #fcfcfc;
+        }
+
+        /* --- Header & Hero --- */
+        header {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--white);
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3rem;
+            margin-top: 10px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .date-badge {
+            background: var(--white);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 2rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 4px;
+            background: var(--accent);
+            margin-top: 5px;
+            border-radius: 2px;
+        }
+
+        /* --- Palestrantes --- */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .speaker-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-top: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .speaker-card h3 {
+            margin: 0 0 5px 0;
+            color: var(--secondary);
+            font-size: 1.25rem;
+        }
+
+        .speaker-role {
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .speaker-desc {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* --- Agenda --- */
+        .agenda-container {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .agenda-item {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 20px;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .agenda-item:last-child {
+            border-bottom: none;
+        }
+
+        .agenda-item:hover {
+            background-color: #f9f0ff;
+        }
+
+        .time {
+            font-weight: 700;
+            min-width: 90px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .event {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+
+        /* --- Interatividade & Forms --- */
+        .interactive-section {
+            background: linear-gradient(to right, #f3e5f5, #e1bee7);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .iframe-placeholder {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px dashed #bbb;
+            margin-top: 20px;
+            color: #777;
+        }
+
+        /* --- Galeria --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            background-color: #e0e0e0;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Mensagem de erro amigável se a foto não existir */
+        .gallery-item img.error {
+            display: none;
+        }
+        .gallery-item.has-error::after {
+            content: 'Adicione foto1.jpg na pasta fotos';
+            text-align: center;
+            padding: 10px;
+            font-size: 0.8rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        footer p { margin: 5px 0; }
+        footer strong { color: var(--white); }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .agenda-item { flex-direction: column; align-items: flex-start; }
+            .time { margin-bottom: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>1º Encontro Técnico de Infraestrutura</h1>
+    <p>Reações Expansivas do Concreto</p>
+    <div class="date-badge"><i class="far fa-calendar-alt"></i> 28 de Janeiro de 2026 • 09:00 às 18:00</div>
+    <br><br>
+    
+    <!-- Botões do Header Atualizados -->
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <a href="#perguntas" class="btn" style="background:var(--white); color:var(--primary)">
+            <i class="fas fa-comment-dots"></i> Enviar Pergunta
+        </a>
+        <!-- Link do Teams atualizado -->
+        <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Yzc3NGRkMTMtZGJhNy00MmFiLWFmMDgtMTVhNTRhZjMwZmEx%40thread.v2/0?context=%7b%22Tid%22%3a%22d233d58a-9973-43a7-af69-6763630548a0%22%2c%22Oid%22%3a%225d77ae6a-7075-4204-b953-983a09372818%22%7d" target="_blank" class="btn" style="background:var(--accent); color:var(--text)">
+            <i class="fas fa-video"></i> Assistir Online (Teams)
+        </a>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Sobre -->
+    <section>
+        <h2><i class="fas fa-info-circle"></i> O Evento</h2>
+        <p>A <strong>Motiva</strong> tem orgulho em iniciar um movimento para fortalecer a cultura técnica e a colaboração no setor de infraestrutura. Este encontro reúne especialistas renomados para discutir as melhores práticas em Obras de Arte Especiais e durabilidade, com foco especial em reações expansivas.</p>
+    </section>
+
+    <!-- Transmissão Online (NOVO BLOCO) -->
+    <section>
+        <h2><i class="fas fa-broadcast-tower"></i> Transmissão Online</h2>
+        <div style="background-color: #eef2ff; padding: 25px; border-radius: 12px; border-left: 6px solid #5b5fc7; display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fab fa-microsoft" style="font-size: 2.5rem; color: #5b5fc7;"></i>
+                <div>
+                    <h3 style="margin: 0; color: #444791;">Acompanhe via Microsoft Teams</h3>
+                    <p style="margin: 0; color: #666; font-size: 0.95rem;"><strong>Sala:</strong> ENCONTRO TÉCNICO RAA</p>
+                </div>
+            </div>
+            
+            <p style="margin: 0;">Para quem não puder comparecer presencialmente, disponibilizamos a transmissão ao vivo de todas as palestras.</p>
+            
+            <!-- Botão do Teams atualizado -->
+            <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Yzc3NGRkMTMtZGJhNy00MmFiLWFmMDgtMTVhNTRhZjMwZmEx%40thread.v2/0?context=%7b%22Tid%22%3a%22d233d58a-9973-43a7-af69-6763630548a0%22%2c%22Oid%22%3a%225d77ae6a-7075-4204-b953-983a09372818%22%7d" target="_blank" class="btn" style="background-color: #5b5fc7; color: white; align-self: flex-start; text-align: center;">
+                <i class="fas fa-video"></i> ENCONTRO TÉCNICO RAA | Ingresso na Reunião | Microsoft Teams
+            </a>
+            
+            <p style="font-size: 0.85rem; color: #888; margin: 0;">
+                *Recomendamos acessar com 10 minutos de antecedência para verificar sua conexão.
+            </p>
+
+            <!-- Bloco de Regras e Cuidados (NOVO) -->
+            <div style="background-color: #fff3e0; border: 1px solid #ffe0b2; border-radius: 8px; padding: 20px; margin-top: 15px;">
+                <h4 style="margin: 0 0 10px 0; color: #e65100; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-exclamation-triangle"></i> Avisos Importantes e Regras de Conduta
+                </h4>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #5d4037; list-style-type: none;">
+                    <li style="margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-ban" style="color: #d84315; margin-top: 3px;"></i>
+                        <span><strong>Proibido Gravar:</strong> A reunião não pode ser gravada e o conteúdo apresentado não pode ser reproduzido ou divulgado externamente sob nenhuma hipótese.</span>
+                    </li>
+                    <li style="margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-user-lock" style="color: #d84315; margin-top: 3px;"></i>
+                        <span><strong>Acesso Restrito:</strong> Este link é exclusivo. É estritamente <strong>proibido o compartilhamento</strong> deste acesso. Somente pessoas previamente inscritas e autorizadas serão admitidas na sala.</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start; gap: 10px;">
+                        <i class="fas fa-microphone-slash" style="color: #d84315; margin-top: 3px;"></i>
+                        <span><strong>Etiqueta Digital:</strong> Por gentileza, confira se seu <strong>microfone e câmera estão desligados</strong> ao entrar. Abra-os somente quando autorizado pelo moderador.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Palestrantes -->
+    <section>
+        <h2><i class="fas fa-users"></i> Palestrantes Confirmados</h2>
+        <div class="speakers-grid">
+            <div class="speaker-card">
+                <h3>Msc. Marcela Barros Sollero</h3>
+                <span class="speaker-role">Concremat Engenharia</span>
+                <p class="speaker-desc">Especialista em Patologia e Terapia de estruturas, membro de comitês normativos (NBR 9452, 16747) e premiada por inovação.</p>
+            </div>
+            <div class="speaker-card">
+                <h3>Dr. Selmo Kuperman</h3>
+                <span class="speaker-role">Desek Engenharia</span>
+                <p class="speaker-desc">Referência internacional em reações expansivas (RAA/DEF) e segurança de barragens. Atuou em Itaipu e Tucuruí.</p>
+            </div>
+            <div class="speaker-card">
+                <h3>Dr. José Eduardo Aguiar</h3>
+                <span class="speaker-role">Recup Engenharia</span>
+                <p class="speaker-desc">Especialista em Patologia, Durabilidade e inspeção de pontes com pós-doutorado em Ottawa.</p>
+            </div>
+            <div class="speaker-card">
+                <h3>Msc. Flávio Alexandre dos Reis</h3>
+                <span class="speaker-role">MRS Logística</span>
+                <p class="speaker-desc">Especialista de Infraestrutura em Obras de Arte Especiais. Utiliza Python para otimização de processos.</p>
+            </div>
+            <div class="speaker-card">
+                <h3>Esp. Jayme Kneip Neto</h3>
+                <span class="speaker-role">MRS Logística</span>
+                <p class="speaker-desc">Gestor de infraestrutura responsável pelo diagnóstico de 6.000 obras. Coautor técnico em reações expansivas.</p>
+            </div>
+            <div class="speaker-card">
+                <h3>Dra. Nicole Pagan Hasparyk</h3>
+                <span class="speaker-role">Consultoria e P&D</span>
+                <p class="speaker-desc">Referência na área de RAA e durabilidade, membro ativo do IBRACON e RILEM.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programação -->
+    <section>
+        <h2><i class="far fa-clock"></i> Programação</h2>
+        <div class="agenda-container">
+            <div class="agenda-item"><div class="time">09:00</div><div class="event">Recepção e Café de Boas Vindas</div></div>
+            <div class="agenda-item"><div class="time">09:30</div><div class="event">Abertura - Liderança Motiva</div></div>
+            <div class="agenda-item"><div class="time">10:00</div><div class="event">Palestra: Msc. Marcela Barros Sollero</div></div>
+            <div class="agenda-item"><div class="time">11:00</div><div class="event">Palestra: Dr. Selmo Kuperman</div></div>
+            <div class="agenda-item"><div class="time">12:00</div><div class="event">Almoço</div></div>
+            <div class="agenda-item"><div class="time">13:30</div><div class="event">Palestra: Dr. José Eduardo Aguiar</div></div>
+            <div class="agenda-item"><div class="time">14:30</div><div class="event">Palestra: Msc. Flávio Alexandre dos Reis</div></div>
+            <div class="agenda-item"><div class="time">15:00</div><div class="event">Palestra: Esp. Jayme Kneip Neto</div></div>
+            <div class="agenda-item"><div class="time">15:30</div><div class="event">Palestra: Dra. Nicole Pagan Hasparyk</div></div>
+            <div class="agenda-item"><div class="time">16:30</div><div class="event">Mesa Redonda e Debate Final</div></div>
+        </div>
+    </section>
+
+    <!-- Perguntas Online -->
+    <section id="perguntas" class="interactive-section">
+        <h2><i class="fas fa-question-circle"></i> Perguntas ao Vivo</h2>
+        <p>Está acompanhando o simpósio? Envie sua dúvida para a mesa redonda agora mesmo pelo Slido.</p>
+        
+        <!-- Integração Slido -->
+        <div style="background: white; padding: 10px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden;">
+            <iframe 
+                src="https://app.sli.do/event/87Wd8fH3VxXLrfGr7XUWF2" 
+                height="500" 
+                width="100%" 
+                frameBorder="0" 
+                style="min-height: 500px;" 
+                title="Slido">
+            </iframe>
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <p style="font-size: 0.9rem; margin-bottom: 10px;">Não conseguiu visualizar acima?</p>
+            <a href="https://app.sli.do/event/87Wd8fH3VxXLrfGr7XUWF2" target="_blank" class="btn" style="background-color: #28a745; color: white;">
+                <i class="fas fa-external-link-alt"></i> Abrir Slido em Nova Aba
+            </a>
+        </div>
+    </section>
+
+    <!-- Localização (ATUALIZADO) -->
+    <section>
+        <h2><i class="fas fa-map-marker-alt"></i> Localização</h2>
+        
+        <!-- Bloco do Local Oficial (NOVO - VERDE) -->
+        <div style="background-color: #e8f5e9; padding: 25px; border-radius: 12px; border-left: 6px solid #2e7d32; display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+            <h3 style="margin: 0; color: #2e7d32; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-map-marker-alt" style="font-size: 1.5rem;"></i> Local Oficial do Evento
+            </h3>
+            <p style="margin: 5px 0;">
+                <strong>Sede CCR AutoBAn / Motiva</strong><br>
+                Av. Prof.ª Maria do Carmo Guimarães Pellegrini, 200 - Jundiaí, SP
+            </p>
+            
+            <!-- Detalhes de Acesso Atualizados -->
+            <div style="margin: 0; font-size: 0.95rem; color: #555; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 6px;">
+                <p style="margin-top: 0; margin-bottom: 10px;">
+                    <i class="fas fa-info-circle"></i> <strong>Orientações de Chegada:</strong>
+                </p>
+                <p style="margin: 0; line-height: 1.5;">
+                    Este endereço direciona para a entrada principal do Grupo Motiva em Jundiaí, sendo o ponto indicado para quem utiliza Uber, Táxi ou transporte por aplicativo.
+                </p>
+                <p style="margin-top: 10px; margin-bottom: 10px; line-height: 1.5;">
+                    Ao chegar, informe na portaria que irá participar do <strong>Encontro Técnico de Infraestrutura</strong> e procure a equipe de apoio para direcionamento.
+                </p>
+                <p style="margin: 0; line-height: 1.5; color: #2e7d32; font-weight: 500;">
+                    <i class="fas fa-building"></i> <strong>Local exato:</strong> Auditório Planejamento (localizado sobre a área de Saúde e Segurança do Trabalho, adjacente ao Prédio A).
+                </p>
+            </div>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Sede+CCR+AutoBAn+Av+Professora+Maria+do+Carmo+Guimarães+Pellegrini+200+Jundiaí" target="_blank" class="btn" style="background-color: #2e7d32; color: white; align-self: flex-start; margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-location-arrow"></i> Traçar Rota para o Local
+            </a>
+        </div>
+
+        <!-- Mapa Real do Google Maps Embed -->
+        <div style="width: 100%; height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                scrolling="no" 
+                marginheight="0" 
+                marginwidth="0" 
+                src="https://maps.google.com/maps?q=Av.+Professora+Maria+do+Carmo+Guimar%C3%A3es+Pellegrini,+200,+Jundia%C3%AD&t=&z=15&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </div>
+
+        <!-- Bloco de Estacionamento Adicionado -->
+        <div style="background-color: #f3e5f5; padding: 25px; border-radius: 12px; border-left: 6px solid var(--secondary); display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+            <h3 style="margin: 0; color: var(--secondary); display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-parking" style="font-size: 1.5rem;"></i> Estacionamento Sugerido
+            </h3>
+            <p style="margin: 5px 0;">
+                <strong>Jund Park</strong><br>
+                R. do Retiro, 3000 - Retiro, Jundiaí - SP, 13209-355
+            </p>
+            <div style="margin: 0; font-size: 0.95rem; color: #555; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 6px;">
+                <p style="margin-top: 0; margin-bottom: 10px;">
+                    <i class="fas fa-info-circle"></i> <strong>Acesso ao Evento:</strong>
+                </p>
+                <p style="margin: 0; line-height: 1.5;">
+                    Este estacionamento é integrado à Universidade Anhanguera e possui uma entrada direta para o Grupo Motiva. O acesso se dá por um <strong>portão de pedestres na cor branca</strong>, onde nossa equipe de apoio estará próxima para recebê-los.
+                </p>
+                <p style="margin-top: 10px; margin-bottom: 0; line-height: 1.5;">
+                    Estaremos devidamente identificados com a credencial do evento e crachá corporativo Motiva. Em caso de dúvidas, solicite orientação ao atendente do estacionamento ou entre em contato com a equipe de apoio.
+                </p>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Jund+Park+Rua+do+Retiro+3000+Jundiai" target="_blank" class="btn" style="align-self: flex-start; margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-location-arrow"></i> Traçar Rota para Estacionamento
+            </a>
+        </div>
+
+        <!-- Bloco de Almoço (NOVO) -->
+        <div style="background-color: #fff8e1; padding: 25px; border-radius: 12px; border-left: 6px solid var(--accent); display: flex; flex-direction: column; gap: 10px;">
+            <h3 style="margin: 0; color: #f57c00; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-utensils" style="font-size: 1.5rem;"></i> Sugestão para Almoço
+            </h3>
+            <p style="margin: 5px 0;">
+                Para o intervalo das 12h00, sugerimos o restaurante <strong>Gauchão Grill</strong>. A indicação se deve à proximidade, praticidade e capacidade para acomodar nosso grupo confortavelmente.
+            </p>
+            <p style="margin: 0; font-size: 0.95rem; color: #555;">
+                <strong>Endereço:</strong> R. do Retiro, 2172 - Vila das Hortencias, Jundiaí - SP, 13209-355
+            </p>
+            <p style="margin: 0; font-size: 0.85rem; color: #777; font-style: italic;">
+                *Todos estão livres para escolher outras opções de restaurantes na região, caso prefiram.
+            </p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Gauchão+Grill+Rua+do+Retiro+2172+Jundiai" target="_blank" class="btn" style="background-color: var(--accent); color: #333; align-self: flex-start; margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-map-marked-alt"></i> Ver Localização do Restaurante
+            </a>
+        </div>
+    </section>
+
+    <!-- Orientações Gerais (NOVA SEÇÃO) -->
+    <section>
+        <h2><i class="fas fa-clipboard-list"></i> Orientações para o Dia</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            
+            <!-- Item 1: Documentos -->
+            <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <i class="fas fa-id-card" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                <h3 style="margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1rem;">Acesso & Segurança</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #555;">
+                    Por normas de segurança, é <strong>obrigatória</strong> a apresentação de documento original com foto (RG ou CNH) na recepção para liberação do acesso.
+                </p>
+            </div>
+
+            <!-- Item 2: Chegada -->
+            <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                <h3 style="margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1rem;">Credenciamento</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #555;">
+                    Recomendamos a chegada a partir das <strong>08:30</strong> para realizar o credenciamento com tranquilidade e desfrutar do café de boas-vindas.
+                </p>
+            </div>
+
+            <!-- Item 3 removido (Wi-Fi) -->
+
+            <!-- Item 4: Acessibilidade -->
+            <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <i class="fas fa-wheelchair" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
+                <h3 style="margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1rem;">Acessibilidade</h3>
+                <p style="margin: 0; font-size: 0.95rem; color: #555;">
+                    O local possui rampas de acesso e elevadores. Caso necessite de apoio específico na chegada, nossa equipe de recepção estará a postos.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Galeria (ATUALIZADO - Link Externo) -->
+    <section>
+        <h2><i class="fas fa-images"></i> Galeria de Fotos</h2>
+        
+        <div style="background-color: #e3f2fd; padding: 25px; border-radius: 12px; border-left: 6px solid #1976d2; display: flex; flex-direction: column; gap: 15px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-camera-retro" style="font-size: 2.5rem; color: #1976d2;"></i>
+                <div>
+                    <h3 style="margin: 0; color: #0d47a1;">Registros do Evento</h3>
+                    <p style="margin: 0; color: #555; font-size: 0.95rem;">As fotos oficiais estarão disponíveis logo após o término do encontro.</p>
+                </div>
+            </div>
+            
+            <p style="margin: 0;">Você poderá acessar, baixar e compartilhar as fotos em alta resolução através do nosso álbum digital compartilhado.</p>
+            
+            <!-- Link para o álbum (Coloque o link do Google Photos/Drive aqui no href) -->
+            <a href="#" target="_blank" class="btn" style="background-color: #1976d2; color: white; align-self: flex-start; text-align: center;">
+                <i class="fas fa-external-link-alt"></i> Acessar Álbum de Fotos
+            </a>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="container">
+        <h3>1º Encontro Técnico de Infraestrutura</h3>
+        <p>Contato: <strong>vinicius.ippolito@motiva.com.br</strong></p>
+        <p>Organização: Motiva • Apoio: Autoban</p>
+        <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.6;">
+            &copy; 2026 Motiva. Todos os direitos reservados.
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
