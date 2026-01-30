@@ -27,13 +27,7 @@
 
         /* --- Header & Hero --- */
         header {
-            /* ATUALIZADO: Imagem de fundo com transparência ajustada */
-            /* O valor 0.75 deixa o roxo mais suave para a foto aparecer mais */
-            background: linear-gradient(135deg, rgba(74, 20, 140, 0.75), rgba(106, 27, 154, 0.75)), url('fotos/fundo-header.jpg');
-            background-size: cover;      /* Garante que a imagem cubra tudo */
-            background-position: center; /* Centraliza a imagem */
-            background-repeat: no-repeat;
-            
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
             color: var(--white);
             padding: 6rem 2rem 4rem;
             text-align: center;
@@ -43,7 +37,7 @@
         header h1 {
             margin: 0;
             font-size: 2.8rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6); /* Sombra mais forte para leitura sobre foto */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         header p {
@@ -51,7 +45,6 @@
             margin-top: 10px;
             opacity: 0.95;
             font-weight: 300;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
         }
 
         .date-badge {
@@ -62,7 +55,7 @@
             font-weight: bold;
             display: inline-block;
             margin-top: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         /* --- Layout --- */
@@ -170,12 +163,36 @@
             font-weight: 500;
         }
 
-        /* --- Interatividade & Forms --- */
-        .interactive-section {
-            background: linear-gradient(to right, #f3e5f5, #e1bee7);
-            padding: 3rem;
-            border-radius: 20px;
-            text-align: center;
+        /* --- Galeria & Botões --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            background-color: #e0e0e0;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
 
         .btn {
@@ -198,13 +215,95 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        .iframe-placeholder {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 10px;
-            border: 2px dashed #bbb;
-            margin-top: 20px;
+        /* --- Testimonials Styles --- */
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 5px 30px 5px; /* Padding bottom for scrollbar/shadow */
+            scroll-snap-type: x mandatory;
+            margin-bottom: 2rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .testimonial-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .testimonial-slider::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 4px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        /* Estilo para os cards em destaque (Slider) */
+        .testimonial-card.featured {
+            flex: 0 0 85%; /* Mobile: ocupa 85% da tela */
+            scroll-snap-align: center;
+            border-top: 5px solid var(--accent);
+            background: linear-gradient(to bottom right, #ffffff, #fff8e1);
+        }
+
+        /* Estilo para o grid comum */
+        .testimonials-category h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-text::before {
+            content: '\201C';
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+            text-align: right;
+            font-size: 0.95rem;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .testimonial-author span {
+            display: block;
+            font-weight: normal;
+            font-size: 0.85rem;
             color: #777;
+            margin-top: 2px;
         }
 
         /* --- Footer --- */
@@ -225,6 +324,13 @@
             .agenda-item { flex-direction: column; align-items: flex-start; }
             .time { margin-bottom: 5px; }
         }
+        
+        /* Desktop Slider adjustments */
+        @media(min-width: 768px) {
+            .testimonial-card.featured {
+                flex: 0 0 48%; /* Desktop: mostra 2 por vez */
+            }
+        }
     </style>
 </head>
 <body>
@@ -232,18 +338,8 @@
 <header>
     <h1>1º Encontro Técnico de Infraestrutura</h1>
     <p>Reações Expansivas do Concreto</p>
-    <div class="date-badge"><i class="far fa-calendar-alt"></i> 28 de Janeiro de 2026 • 09:00 às 18:00</div>
+    <div class="date-badge"><i class="far fa-check-circle"></i> Realizado em 28 de Janeiro de 2026</div>
     <br><br>
-    
-    <!-- Botões do Header -->
-    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-        <a href="#perguntas" class="btn" style="background:var(--white); color:var(--primary)">
-            <i class="fas fa-comment-dots"></i> Enviar Pergunta
-        </a>
-        <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Yzc3NGRkMTMtZGJhNy00MmFiLWFmMDgtMTVhNTRhZjMwZmEx%40thread.v2/0?context=%7b%22Tid%22%3a%22d233d58a-9973-43a7-af69-6763630548a0%22%2c%22Oid%22%3a%225d77ae6a-7075-4204-b953-983a09372818%22%7d" target="_blank" class="btn" style="background:var(--accent); color:var(--text)">
-            <i class="fas fa-video"></i> Assistir Online (Teams)
-        </a>
-    </div>
 </header>
 
 <div class="container">
@@ -251,57 +347,116 @@
     <!-- Sobre -->
     <section>
         <h2><i class="fas fa-info-circle"></i> O Evento</h2>
-        <p>A <strong>Motiva</strong> tem orgulho em iniciar um movimento para fortalecer a cultura técnica e a colaboração no setor de infraestrutura. Este encontro reúne especialistas renomados para discutir as melhores práticas em Obras de Arte Especiais e durabilidade, com foco especial em reações expansivas.</p>
+        <p>A <strong>Motiva</strong> tem orgulho de ter iniciado este movimento para fortalecer a cultura técnica e a colaboração no setor de infraestrutura. O encontro reuniu especialistas renomados para discutir as melhores práticas em Obras de Arte Especiais e durabilidade, com foco especial em reações expansivas.</p>
+        
+        <!-- Imagem do Evento (Foto do Auditório) -->
+        <!-- ATUALIZADO: Agora busca a foto na mesma pasta (sem /fotos/) -->
+        <div style="margin-top: 25px; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08);">
+            <img src="IMG-20260129-WA0064.jpg" alt="Visão geral do auditório durante o evento" style="width: 100%; height: auto; display: block;" onerror="this.onerror=null; this.src='https://placehold.co/1000x500/e0e0e0/666?text=Foto+do+Evento+(IMG-20260129-WA0064.jpg)';">
+        </div>
     </section>
 
-    <!-- Transmissão Online -->
-    <section>
-        <h2><i class="fas fa-broadcast-tower"></i> Transmissão Online</h2>
-        <div style="background-color: #eef2ff; padding: 25px; border-radius: 12px; border-left: 6px solid #5b5fc7; display: flex; flex-direction: column; gap: 15px;">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <i class="fab fa-microsoft" style="font-size: 2.5rem; color: #5b5fc7;"></i>
-                <div>
-                    <h3 style="margin: 0; color: #444791;">Acompanhe via Microsoft Teams</h3>
-                    <p style="margin: 0; color: #666; font-size: 0.95rem;"><strong>Sala:</strong> ENCONTRO TÉCNICO RAA</p>
+    <!-- Depoimentos -->
+    <section style="background-color: #fcfcfc;">
+        <h2><i class="fas fa-quote-right"></i> O que dizem sobre o evento</h2>
+        
+        <!-- Slider Destaque -->
+        <div class="testimonial-slider">
+            <div class="testimonial-card featured">
+                <p class="testimonial-text">"O Primeiro Encontro Técnico de Infraestrutura, promovido pela Motiva, proporcionou uma relevante troca de conhecimento por meio de apresentações de alto nível sobre um tema complexo e de grande impacto na durabilidade das obras. As discussões técnicas trouxeram aprendizados práticos e reflexões fundamentais sobre durabilidade, prevenção e gestão dos ativos."</p>
+                <div class="testimonial-author">
+                    Artur Henrique Evangelista Carvalho
+                    <span>Motiva</span>
                 </div>
             </div>
-            
-            <p style="margin: 0;">Para quem não puder comparecer presencialmente, disponibilizamos a transmissão ao vivo de todas as palestras.</p>
-            
-            <a href="https://teams.microsoft.com/l/meetup-join/19%3ameeting_Yzc3NGRkMTMtZGJhNy00MmFiLWFmMDgtMTVhNTRhZjMwZmEx%40thread.v2/0?context=%7b%22Tid%22%3a%22d233d58a-9973-43a7-af69-6763630548a0%22%2c%22Oid%22%3a%225d77ae6a-7075-4204-b953-983a09372818%22%7d" target="_blank" class="btn" style="background-color: #5b5fc7; color: white; align-self: flex-start; text-align: center;">
-                <i class="fas fa-video"></i> ENCONTRO TÉCNICO RAA | Ingresso na Reunião | Microsoft Teams
-            </a>
-            
-            <p style="font-size: 0.85rem; color: #888; margin: 0;">
-                *Recomendamos acessar com 10 minutos de antecedência para verificar sua conexão.
-            </p>
+            <div class="testimonial-card featured">
+                <p class="testimonial-text">"O Encontro Técnico foi uma iniciativa necessária e importantíssima. Considero que foi uma oportunidade de atualização e crescimento valiosa e estou ansiosa pelos próximos."</p>
+                <div class="testimonial-author">
+                    Marcela Barros de Souza Sollero
+                    <span>Concremat</span>
+                </div>
+            </div>
+        </div>
 
-            <!-- Bloco de Regras e Cuidados -->
-            <div style="background-color: #fff3e0; border: 1px solid #ffe0b2; border-radius: 8px; padding: 20px; margin-top: 15px;">
-                <h4 style="margin: 0 0 10px 0; color: #e65100; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-exclamation-triangle"></i> Avisos Importantes e Regras de Conduta
-                </h4>
-                <ul style="margin: 0; padding-left: 20px; font-size: 0.9rem; color: #5d4037; list-style-type: none;">
-                    <li style="margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px;">
-                        <i class="fas fa-ban" style="color: #d84315; margin-top: 3px;"></i>
-                        <span><strong>Proibido Gravar:</strong> A reunião não pode ser gravada e o conteúdo apresentado não pode ser reproduzido ou divulgado externamente sob nenhuma hipótese.</span>
-                    </li>
-                    <li style="margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px;">
-                        <i class="fas fa-user-lock" style="color: #d84315; margin-top: 3px;"></i>
-                        <span><strong>Acesso Restrito:</strong> Este link é exclusivo. É estritamente <strong>proibido o compartilhamento</strong> deste acesso. Somente pessoas previamente inscritas e autorizadas serão admitidas na sala.</span>
-                    </li>
-                    <li style="display: flex; align-items: flex-start; gap: 10px;">
-                        <i class="fas fa-microphone-slash" style="color: #d84315; margin-top: 3px;"></i>
-                        <span><strong>Etiqueta Digital:</strong> Por gentileza, confira se seu <strong>microfone e câmera estão desligados</strong> ao entrar. Abra-os somente quando autorizado pelo moderador.</span>
-                    </li>
-                </ul>
+        <!-- Categorias Grid -->
+        <div class="testimonials-category">
+            <h3><i class="fas fa-tools"></i> Relevância Técnica e Conteúdo</h3>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"A experiência foi positiva em alinhar parte acadêmica e prática de um tema pouco explorado na comunidade técnica."</p>
+                    <div class="testimonial-author">Marcelo Melo <span>Casagrande Engenharia</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Temas abordados de extrema importância."</p>
+                    <div class="testimonial-author">Reginato Soares Batista <span>MRS Logística S.A.</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Oportunidade rara de trazer conhecimentos básicos para a comunidade que lida com problemas relacionados com as patologias das construções."</p>
+                    <div class="testimonial-author">José Eduardo Aguiar <span>Recup</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"O tema escolhido é da atualidade e de extrema relevância."</p>
+                    <div class="testimonial-author">Nicole <span>Consultora e Professora na UNILA</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Parabéns pela iniciativa, excelente tema."</p>
+                    <div class="testimonial-author">Fábio Alves de Mattos <span>CSN CIMENTOS BRASIL S.A</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials-category">
+            <h3><i class="fas fa-handshake"></i> Organização e Networking</h3>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Organização do evento presencial e online possibilitou a participação ampla e com altíssimo nível dos palestrantes."</p>
+                    <div class="testimonial-author">Flavio Aparecido de Sousa <span>Rumo Logistica</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Evento excelente, troca de experiências maravilhosa, aprendizado que não tem preço. Vou levar para vida."</p>
+                    <div class="testimonial-author">Renata Amália Bernardino <span>Motiva Trilhos</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Parabéns pelo iniciativa, protagonismo, criatividade e disposição na elaboração do evento!"</p>
+                    <div class="testimonial-author">Merielen Almeida <span>Ecorodovias</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Organização ótima e convidados bem alinhados com o tema."</p>
+                    <div class="testimonial-author">Caio Vinícius Schlögel <span>Rumo</span></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Foi um encontro de muito aprendizado e boa oportunidade para fortalecer relacionamentos no meio técnico."</p>
+                    <div class="testimonial-author">Katia <span>Motiva</span></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Palestrantes -->
+    <!-- Materiais e Documentos (Apenas Botões) -->
     <section>
-        <h2><i class="fas fa-users"></i> Palestrantes Confirmados</h2>
+        <!-- Área de Downloads e Fotos -->
+        <div style="text-align: center; background-color: #e3f2fd; padding: 30px; border-radius: 12px; border-left: 6px solid #1976d2; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <h2 style="margin: 0 0 20px 0; color: #0d47a1; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <i class="fas fa-folder-open"></i> Materiais disponíveis para acesso
+            </h2>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+                <!-- Botão Fotos -->
+                <a href="https://grupoccr-my.sharepoint.com/my?id=%2Fpersonal%2Fvinicius%5Fippolito%5Fmotiva%5Fcom%5Fbr%2FDocuments%2F1%C2%B0%20Encontro%20T%C3%A9cnico%20de%20Infraestrutura%20%2D%20Fotos%2FFotos%20do%20Evento&ga=1" target="_blank" class="btn" style="background-color: #1976d2; color: white; margin: 0;">
+                    <i class="fas fa-camera"></i> Acessar Fotos do Evento
+                </a>
+
+                <!-- Botão Documentos -->
+                <a href="https://grupoccr-my.sharepoint.com/:f:/g/personal/vinicius_ippolito_motiva_com_br/IgA7CrmeXqQARL7zOW2Prb0LATT1wCOYx8nSS31Ia6Vzk3s?e=sPbarj" target="_blank" class="btn" style="background-color: #0d47a1; color: white; margin: 0;">
+                    <i class="fas fa-file-download"></i> Apresentações e documentos compartilháveis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Palestrantes (Mantido como Histórico) -->
+    <section>
+        <h2><i class="fas fa-users"></i> Palestrantes</h2>
         <div class="speakers-grid">
             <div class="speaker-card">
                 <h3>Msc. Marcela Barros Sollero</h3>
@@ -336,9 +491,9 @@
         </div>
     </section>
 
-    <!-- Programação -->
+    <!-- Programação (Mantido como Histórico) -->
     <section>
-        <h2><i class="far fa-clock"></i> Programação</h2>
+        <h2><i class="far fa-clock"></i> Programação Realizada</h2>
         <div class="agenda-container">
             <div class="agenda-item"><div class="time">09:00</div><div class="event">Recepção e Café de Boas Vindas</div></div>
             <div class="agenda-item"><div class="time">09:30</div><div class="event">Abertura - Liderança Motiva</div></div>
@@ -350,191 +505,6 @@
             <div class="agenda-item"><div class="time">15:00</div><div class="event">Palestra: Esp. Jayme Kneip Neto</div></div>
             <div class="agenda-item"><div class="time">15:30</div><div class="event">Palestra: Dra. Nicole Pagan Hasparyk</div></div>
             <div class="agenda-item"><div class="time">16:30</div><div class="event">Mesa Redonda e Debate Final</div></div>
-        </div>
-    </section>
-
-    <!-- Perguntas Online (ATUALIZADO) -->
-    <section id="perguntas" class="interactive-section">
-        <h2><i class="fas fa-question-circle"></i> Perguntas ao Vivo</h2>
-        
-        <!-- Texto Explicativo Novo -->
-        <div style="max-width: 800px; margin: 0 auto 20px auto; color: #555;">
-            <p style="font-size: 1.1rem; margin-bottom: 10px;">
-                As perguntas que forem surgindo serão computadas no Slido e, durante o evento, 
-                os participantes poderão <strong>votar nas questões mais relevantes</strong>.
-            </p>
-            <p style="font-size: 1rem;">
-                As dúvidas mais votadas serão priorizadas e abordadas pelos especialistas durante a mesa redonda final. 
-                Participe enviando ou votando!
-            </p>
-        </div>
-        
-        <!-- Integração Slido -->
-        <div style="background: white; padding: 10px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); overflow: hidden;">
-            <iframe 
-                src="https://app.sli.do/event/aDakNJGDf8Evrs5gJawNdU" 
-                height="500" 
-                width="100%" 
-                frameBorder="0" 
-                style="min-height: 500px;" 
-                title="Slido">
-            </iframe>
-        </div>
-        
-        <div style="margin-top: 20px;">
-            <p style="font-size: 0.9rem; margin-bottom: 10px;">Não conseguiu visualizar acima?</p>
-            <a href="https://app.sli.do/event/aDakNJGDf8Evrs5gJawNdU" target="_blank" class="btn" style="background-color: #28a745; color: white;">
-                <i class="fas fa-external-link-alt"></i> Abrir Slido em Nova Aba
-            </a>
-        </div>
-    </section>
-
-    <!-- Localização -->
-    <section>
-        <h2><i class="fas fa-map-marker-alt"></i> Localização</h2>
-        
-        <!-- Bloco do Local Oficial -->
-        <div style="background-color: #e8f5e9; padding: 25px; border-radius: 12px; border-left: 6px solid #2e7d32; display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
-            <h3 style="margin: 0; color: #2e7d32; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-map-marker-alt" style="font-size: 1.5rem;"></i> Local Oficial do Evento
-            </h3>
-            <p style="margin: 5px 0;">
-                <strong>Sede CCR AutoBAn / Motiva</strong><br>
-                Av. Prof.ª Maria do Carmo Guimarães Pellegrini, 200 - Jundiaí, SP
-            </p>
-            
-            <div style="margin: 0; font-size: 0.95rem; color: #555; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 6px;">
-                <p style="margin-top: 0; margin-bottom: 10px;">
-                    <i class="fas fa-info-circle"></i> <strong>Orientações de Chegada:</strong>
-                </p>
-                <p style="margin: 0; line-height: 1.5;">
-                    Este endereço direciona para a entrada principal do Grupo Motiva em Jundiaí, sendo o ponto indicado para quem utiliza Uber, Táxi ou transporte por aplicativo.
-                </p>
-                <p style="margin-top: 10px; margin-bottom: 10px; line-height: 1.5;">
-                    Ao chegar, informe na portaria que irá participar do <strong>Encontro Técnico de Infraestrutura</strong> e procure a equipe de apoio para direcionamento.
-                </p>
-                <p style="margin: 0; line-height: 1.5; color: #2e7d32; font-weight: 500;">
-                    <i class="fas fa-building"></i> <strong>Local exato:</strong> Auditório Planejamento (localizado sobre a área de Saúde e Segurança do Trabalho, adjacente ao Prédio A).
-                </p>
-            </div>
-
-            <a href="https://www.google.com/maps/search/?api=1&query=Sede+CCR+AutoBAn+Av+Professora+Maria+do+Carmo+Guimarães+Pellegrini+200+Jundiaí" target="_blank" class="btn" style="background-color: #2e7d32; color: white; align-self: flex-start; margin-top: 10px; font-size: 0.9rem;">
-                <i class="fas fa-location-arrow"></i> Traçar Rota para o Local
-            </a>
-        </div>
-
-        <!-- Mapa Real do Google Maps -->
-        <div style="width: 100%; height: 400px; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 30px;">
-            <iframe 
-                width="100%" 
-                height="100%" 
-                frameborder="0" 
-                scrolling="no" 
-                marginheight="0" 
-                marginwidth="0" 
-                src="https://maps.google.com/maps?q=Av.+Professora+Maria+do+Carmo+Guimar%C3%A3es+Pellegrini,+200,+Jundia%C3%AD&t=&z=15&ie=UTF8&iwloc=&output=embed">
-            </iframe>
-        </div>
-
-        <!-- Bloco de Estacionamento -->
-        <div style="background-color: #f3e5f5; padding: 25px; border-radius: 12px; border-left: 6px solid var(--secondary); display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
-            <h3 style="margin: 0; color: var(--secondary); display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-parking" style="font-size: 1.5rem;"></i> Estacionamento Sugerido
-            </h3>
-            <p style="margin: 5px 0;">
-                <strong>Jund Park</strong><br>
-                R. do Retiro, 3000 - Retiro, Jundiaí - SP, 13209-355
-            </p>
-            <div style="margin: 0; font-size: 0.95rem; color: #555; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 6px;">
-                <p style="margin-top: 0; margin-bottom: 10px;">
-                    <i class="fas fa-info-circle"></i> <strong>Acesso ao Evento:</strong>
-                </p>
-                <p style="margin: 0; line-height: 1.5;">
-                    Este estacionamento é integrado à Universidade Anhanguera e possui uma entrada direta para o Grupo Motiva. O acesso se dá por um <strong>portão de pedestres na cor branca</strong>, onde nossa equipe de apoio estará próxima para recebê-los.
-                </p>
-                <p style="margin-top: 10px; margin-bottom: 0; line-height: 1.5;">
-                    Estaremos devidamente identificados com a credencial do evento e crachá corporativo Motiva. Em caso de dúvidas, solicite orientação ao atendente do estacionamento ou entre em contato com a equipe de apoio.
-                </p>
-            </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=Jund+Park+Rua+do+Retiro+3000+Jundiai" target="_blank" class="btn" style="align-self: flex-start; margin-top: 10px; font-size: 0.9rem;">
-                <i class="fas fa-location-arrow"></i> Traçar Rota para Estacionamento
-            </a>
-        </div>
-
-        <!-- Bloco de Almoço -->
-        <div style="background-color: #fff8e1; padding: 25px; border-radius: 12px; border-left: 6px solid var(--accent); display: flex; flex-direction: column; gap: 10px;">
-            <h3 style="margin: 0; color: #f57c00; display: flex; align-items: center; gap: 10px;">
-                <i class="fas fa-utensils" style="font-size: 1.5rem;"></i> Sugestão para Almoço
-            </h3>
-            <p style="margin: 5px 0;">
-                Para o intervalo das 12h00, sugerimos o restaurante <strong>Gauchão Grill</strong>. A indicação se deve à proximidade, praticidade e capacidade para acomodar nosso grupo confortavelmente.
-            </p>
-            <p style="margin: 0; font-size: 0.95rem; color: #555;">
-                <strong>Endereço:</strong> R. do Retiro, 2172 - Vila das Hortencias, Jundiaí - SP, 13209-355
-            </p>
-            <p style="margin: 0; font-size: 0.85rem; color: #777; font-style: italic;">
-                *Todos estão livres para escolher outras opções de restaurantes na região, caso prefiram.
-            </p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Gauchão+Grill+Rua+do+Retiro+2172+Jundiai" target="_blank" class="btn" style="background-color: var(--accent); color: #333; align-self: flex-start; margin-top: 10px; font-size: 0.9rem;">
-                <i class="fas fa-map-marked-alt"></i> Ver Localização do Restaurante
-            </a>
-        </div>
-    </section>
-
-    <!-- Orientações Gerais -->
-    <section>
-        <h2><i class="fas fa-clipboard-list"></i> Orientações para o Dia</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            
-            <!-- Item 1: Documentos -->
-            <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                <i class="fas fa-id-card" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
-                <h3 style="margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1rem;">Acesso & Segurança</h3>
-                <p style="margin: 0; font-size: 0.95rem; color: #555;">
-                    Por normas de segurança, é <strong>obrigatória</strong> a apresentação de documento original com foto (RG ou CNH) na recepção para liberação do acesso.
-                </p>
-            </div>
-
-            <!-- Item 2: Chegada -->
-            <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
-                <h3 style="margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1rem;">Credenciamento</h3>
-                <p style="margin: 0; font-size: 0.95rem; color: #555;">
-                    Recomendamos a chegada a partir das <strong>08:30</strong> para realizar o credenciamento com tranquilidade e desfrutar do café de boas-vindas.
-                </p>
-            </div>
-
-            <!-- Item 4: Acessibilidade -->
-            <div style="background: white; padding: 20px; border-radius: 10px; border-bottom: 4px solid var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                <i class="fas fa-wheelchair" style="font-size: 2rem; color: var(--accent); margin-bottom: 15px;"></i>
-                <h3 style="margin: 0 0 10px 0; color: var(--secondary); font-size: 1.1rem;">Acessibilidade</h3>
-                <p style="margin: 0; font-size: 0.95rem; color: #555;">
-                    O local possui rampas de acesso e elevadores. Caso necessite de apoio específico na chegada, nossa equipe de recepção estará a postos.
-                </p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Galeria (Link Externo) -->
-    <section>
-        <h2><i class="fas fa-images"></i> Galeria de Fotos</h2>
-        
-        <div style="background-color: #e3f2fd; padding: 25px; border-radius: 12px; border-left: 6px solid #1976d2; display: flex; flex-direction: column; gap: 15px;">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <i class="fas fa-camera-retro" style="font-size: 2.5rem; color: #1976d2;"></i>
-                <div>
-                    <h3 style="margin: 0; color: #0d47a1;">Registros do Evento</h3>
-                    <p style="margin: 0; color: #555; font-size: 0.95rem;">As fotos oficiais estarão disponíveis logo após o término do encontro.</p>
-                </div>
-            </div>
-            
-            <p style="margin: 0;">Você poderá acessar, baixar e compartilhar as fotos em alta resolução através do nosso álbum digital compartilhado.</p>
-            
-            <!-- Link para o álbum (Substitua o # pelo link real quando tiver) -->
-            <a href="#" target="_blank" class="btn" style="background-color: #1976d2; color: white; align-self: flex-start; text-align: center;">
-                <i class="fas fa-external-link-alt"></i> Acessar Álbum de Fotos
-            </a>
         </div>
     </section>
 
